@@ -4,19 +4,10 @@ import 'package:provider/provider.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../widgets/backgrounds/animated_background.dart';
 import '../../../widgets/buttons/back_to_top_button.dart';
-import '../../../widgets/footer/footer.dart';
 import '../../../widgets/navigation/app_drawer.dart';
-import '../../../widgets/navigation/custom_app_bar.dart';
-import '../../../widgets/navigation/scroll_progress_indicator.dart';
-import '../../about/views/about_view.dart';
-import '../../contact/views/contact_view.dart';
-import '../../experience/views/experience_view.dart';
-import '../../home/views/home_view.dart';
-import '../../home/widgets/technology_strip.dart';
-import '../../projects/viewmodels/projects_viewmodel.dart';
-import '../../projects/views/projects_view.dart';
-import '../../skills/viewmodels/skills_viewmodel.dart';
 import '../viewmodels/shell_viewmodel.dart';
+import '../widgets/shell_navigation_header.dart';
+import '../widgets/shell_scroll_content.dart';
 
 class MainShellView extends StatefulWidget {
   final String? initialSection;
@@ -77,98 +68,20 @@ class _MainShellViewState extends State<MainShellView> {
         child: Stack(
           children: [
             // Scrollable Content with Centered Container Max Width 1300px
-            RefreshIndicator(
-              onRefresh: () async {
-                await Future.wait([
-                  context.read<SkillsViewModel>().loadSkills(),
-                  context.read<ProjectsViewModel>().loadProjects(),
-                ]);
-              },
-              child: SingleChildScrollView(
-                controller: shellViewModel.scrollController,
-                physics: const AlwaysScrollableScrollPhysics(),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 70), // AppBar spacing
-                    // Centered Container Flow (Hero -> Technology Strip -> About -> Projects -> Experience -> Contact)
-                    Center(
-                      child: Container(
-                        constraints: const BoxConstraints(maxWidth: 1300),
-                        child: Column(
-                          children: [
-                            Container(
-                              key: shellViewModel.sectionKeys['Home'],
-                              child: HomeView(
-                                onViewProjects: () =>
-                                    shellViewModel.scrollToSection('Projects'),
-                                onContactMe: () =>
-                                    shellViewModel.scrollToSection('Contact'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    // Technology Strip full width
-                    const TechnologyStrip(),
-
-                    // Centered Container for remaining sections
-                    Center(
-                      child: Container(
-                        constraints: const BoxConstraints(maxWidth: 1300),
-                        child: Column(
-                          children: [
-                            Container(
-                              key: shellViewModel.sectionKeys['About'],
-                              child: const AboutView(),
-                            ),
-                            Container(
-                              key: shellViewModel.sectionKeys['Projects'],
-                              child: const ProjectsView(),
-                            ),
-                            Container(
-                              key: shellViewModel.sectionKeys['Experience'],
-                              child: const ExperienceView(),
-                            ),
-                            Container(
-                              key: shellViewModel.sectionKeys['Contact'],
-                              child: const ContactView(),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    // Footer
-                    Footer(
-                      onNavClick: (title) =>
-                          shellViewModel.scrollToSection(title),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            ShellScrollContent(shellViewModel: shellViewModel),
 
             // Top Sticky Navigation Bar & Progress Indicator
             Positioned(
               top: 0,
               left: 0,
               right: 0,
-              child: Column(
-                children: [
-                  ScrollProgressIndicator(
-                    progress: shellViewModel.scrollProgress,
-                  ),
-                  CustomAppBar(
-                    navItems: AppConstants.navItems,
-                    activeIndex: shellViewModel.activeNavIndex,
-                    onItemSelected: (title) =>
-                        shellViewModel.scrollToSection(title),
-                    onOpenDrawer: () =>
-                        _scaffoldKey.currentState?.openEndDrawer(),
-                  ),
-                ],
+              child: ShellNavigationHeader(
+                scrollProgress: shellViewModel.scrollProgress,
+                activeNavIndex: shellViewModel.activeNavIndex,
+                onItemSelected: (title) =>
+                    shellViewModel.scrollToSection(title),
+                onOpenDrawer: () =>
+                    _scaffoldKey.currentState?.openEndDrawer(),
               ),
             ),
 

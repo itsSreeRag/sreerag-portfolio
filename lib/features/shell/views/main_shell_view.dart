@@ -80,8 +80,7 @@ class _MainShellViewState extends State<MainShellView> {
                 activeNavIndex: shellViewModel.activeNavIndex,
                 onItemSelected: (title) =>
                     shellViewModel.scrollToSection(title),
-                onOpenDrawer: () =>
-                    _scaffoldKey.currentState?.openEndDrawer(),
+                onOpenDrawer: () => _scaffoldKey.currentState?.openEndDrawer(),
               ),
             ),
 

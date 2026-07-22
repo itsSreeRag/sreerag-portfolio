@@ -29,9 +29,7 @@ class CustomAppBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.background.withValues(alpha: 0.85),
         border: Border(
-          bottom: BorderSide(
-            color: Colors.white.withValues(alpha: 0.05),
-          ),
+          bottom: BorderSide(color: Colors.white.withValues(alpha: 0.05)),
         ),
       ),
       child: Center(
@@ -47,11 +45,10 @@ class CustomAppBar extends StatelessWidget {
                   behavior: HitTestBehavior.opaque,
                   onTap: () => onItemSelected('Home'),
                   child: Text(
-                    AppConstants.name,
-                    style: AppTypography.titleLarge(color: Colors.white).copyWith(
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 0.2,
-                    ),
+                    AppConstants.appBarName,
+                    style: AppTypography.titleLarge(
+                      color: Colors.white,
+                    ).copyWith(fontWeight: FontWeight.w700, letterSpacing: 0.2),
                   ),
                 ),
               ),

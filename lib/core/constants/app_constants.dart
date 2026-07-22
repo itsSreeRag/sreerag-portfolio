@@ -1,4 +1,5 @@
 abstract class AppConstants {
+  static const String appBarName = 'SreeRag';
   static const String name = 'Sreerag';
   static const String title = 'Flutter Developer';
   static const String headline = 'Software Developer';
@@ -13,8 +14,8 @@ abstract class AppConstants {
       'Since then, this has led me to specialize in Flutter engineering, building scalable applications '
       'that fulfill my passion for learning and building great software.';
 
-  static const String email = 'sreerag.dev@outlook.com';
-  static const String phone = '+91 98765 43210';
+  static const String email = 'connectsreeragp@gmail.com';
+  static const String phone = '+91 7034659121';
   static const String location = 'Kerala, India';
   static const String githubUrl = 'https://github.com/sreerag-dev';
   static const String linkedinUrl = 'https://linkedin.com/in/sreerag-dev';

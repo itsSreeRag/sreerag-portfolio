@@ -137,7 +137,8 @@ class AppDrawer extends StatelessWidget {
                         UrlLauncherService.openUrl(AppConstants.githubUrl),
                   ),
                   IconButton(
-                    icon: const FaIcon(FontAwesomeIcons.linkedin,
+                    icon: const FaIcon(
+                      FontAwesomeIcons.linkedin,
                       color: AppColors.textSecondary,
                     ),
                     onPressed: () =>

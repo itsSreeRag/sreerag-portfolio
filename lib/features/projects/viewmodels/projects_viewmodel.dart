@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/services/url_launcher_service.dart';
 import '../../../models/project_model.dart';
 import '../../../repositories/portfolio_repository.dart';
 
@@ -30,5 +31,9 @@ class ProjectsViewModel extends ChangeNotifier {
   void selectProject(ProjectModel? project) {
     _selectedProject = project;
     notifyListeners();
+  }
+
+  void openUrl(String url) {
+    UrlLauncherService.openUrl(url);
   }
 }

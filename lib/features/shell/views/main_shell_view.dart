@@ -45,6 +45,13 @@ class _MainShellViewState extends State<MainShellView> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Precache hero profile image into GPU memory so it loads instantly without any lag
+    precacheImage(const AssetImage('assets/profile/proflie.png'), context);
+  }
+
+  @override
   void didUpdateWidget(covariant MainShellView oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.initialSection != oldWidget.initialSection &&

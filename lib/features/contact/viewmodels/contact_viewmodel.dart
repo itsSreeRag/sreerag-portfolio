@@ -20,6 +20,7 @@ class ContactViewModel extends ChangeNotifier {
   Future<bool> submitForm({
     required String name,
     required String email,
+    String? phone,
     required String subject,
     required String message,
   }) async {
@@ -32,6 +33,7 @@ class ContactViewModel extends ChangeNotifier {
       final form = ContactFormModel(
         name: name,
         email: email,
+        phone: phone,
         subject: subject,
         message: message,
       );

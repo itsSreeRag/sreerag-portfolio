@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/responsive/responsive_breakpoints.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../widgets/loaders/project_shimmer.dart';
-import '../../../widgets/typography/section_header.dart';
 import '../viewmodels/projects_viewmodel.dart';
 import '../widgets/project_card.dart';
 import '../widgets/project_detail_dialog.dart';
@@ -18,26 +18,24 @@ class ProjectsView extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? AppSpacing.md : AppSpacing.xl,
-        vertical: AppSpacing.xxl,
+        horizontal: isMobile ? AppSpacing.lg : AppSpacing.xxl,
+        vertical: isMobile ? 48 : 80,
       ),
       child: Consumer<ProjectsViewModel>(
         builder: (context, viewModel, child) {
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SectionHeader(
-                title: 'Projects',
-                subtitle: 'Production software engineered with clean architecture, state management, and robust logic.',
-              ),
-              const SizedBox(height: AppSpacing.xxl),
+              // Centered Section Header (matching reference image)
+              const _ProjectsHeader(),
+              const SizedBox(height: 64),
 
               if (viewModel.isLoading)
                 Column(
                   children: List.generate(
                     3,
                     (index) => const Padding(
-                      padding: EdgeInsets.only(bottom: AppSpacing.xxl),
+                      padding: EdgeInsets.only(bottom: 64),
                       child: ProjectShimmer(),
                     ),
                   ),
@@ -49,13 +47,10 @@ class ProjectsView extends StatelessWidget {
                     (index) {
                       final project = viewModel.projects[index];
                       final isReversed = index % 2 != 0; // Alternating 0=Text Left, 1=Image Left
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: AppSpacing.xxl),
-                        child: ProjectCard(
-                          project: project,
-                          isReversed: isReversed,
-                          onViewCaseStudy: () => _openDetail(context, project),
-                        ),
+                      return ProjectCard(
+                        project: project,
+                        isReversed: isReversed,
+                        onViewCaseStudy: () => _openDetail(context, project),
                       );
                     },
                   ),
@@ -74,3 +69,55 @@ class ProjectsView extends StatelessWidget {
     );
   }
 }
+
+class _ProjectsHeader extends StatelessWidget {
+  const _ProjectsHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Text(
+          'Projects',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 42,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.5,
+          ),
+        ),
+        const SizedBox(height: 14),
+
+        // Vertical red line with accent dot below (matching reference image)
+        Column(
+          children: [
+            Container(
+              width: 2,
+              height: 18,
+              color: AppColors.dotAccent,
+            ),
+            const SizedBox(height: 4),
+            Container(
+              width: 6,
+              height: 6,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.dotAccent,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.dotAccent,
+                    blurRadius: 6,
+                    spreadRadius: 1,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+

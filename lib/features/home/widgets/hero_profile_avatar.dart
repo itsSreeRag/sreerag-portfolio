@@ -7,13 +7,25 @@ import '../../../core/theme/app_colors.dart';
 /// The ring sits BEHIND the photo (not clipping it) so the cutout can
 /// naturally overflow above and below the ring edge, matching the
 /// reference design exactly.
-class HeroProfileAvatar extends StatelessWidget {
+class HeroProfileAvatar extends StatefulWidget {
   final bool isMobile;
 
   const HeroProfileAvatar({super.key, this.isMobile = false});
 
   @override
+  State<HeroProfileAvatar> createState() => _HeroProfileAvatarState();
+}
+
+class _HeroProfileAvatarState extends State<HeroProfileAvatar> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(const AssetImage('assets/profile/proflie.png'), context);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final isMobile = widget.isMobile;
     final double ringSize = isMobile ? 240 : 340;
     final double stackWidth = isMobile ? 320 : 440;
     final double stackHeight = isMobile ? 340 : 440;
@@ -91,6 +103,9 @@ class HeroProfileAvatar extends StatelessWidget {
               'assets/profile/proflie.png',
               fit: BoxFit.fitHeight,
               alignment: Alignment.center,
+              gaplessPlayback: true,
+              filterQuality: FilterQuality.medium,
+              isAntiAlias: true,
               errorBuilder: (context, error, stackTrace) => Icon(
                 Icons.person_rounded,
                 size: isMobile ? 120 : 160,
@@ -119,4 +134,7 @@ class _Chevron extends StatelessWidget {
     );
   }
 }
+
+
+
 

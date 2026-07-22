@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../../core/services/url_launcher_service.dart';
 
 class HomeViewModel extends ChangeNotifier {
   int _currentRoleIndex = 0;
@@ -18,6 +19,11 @@ class HomeViewModel extends ChangeNotifier {
       _currentRoleIndex = (_currentRoleIndex + 1) % AppConstants.typingRoles.length;
       notifyListeners();
     });
+  }
+
+  /// Launches the resume link
+  void openResume() {
+    UrlLauncherService.openUrl(AppConstants.resumeUrl);
   }
 
   @override

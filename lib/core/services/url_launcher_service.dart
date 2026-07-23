@@ -5,8 +5,18 @@ class UrlLauncherService {
   static Future<bool> openUrl(String urlString) async {
     try {
       final Uri uri = Uri.parse(urlString);
+      final isMailOrPhone = uri.scheme == 'mailto' || uri.scheme == 'tel';
+
+      // Use platformDefault for mailto/tel so web browsers don't open an empty '_blank' tab.
+      final mode = isMailOrPhone
+          ? LaunchMode.platformDefault
+          : LaunchMode.externalApplication;
+
       if (await canLaunchUrl(uri)) {
-        return await launchUrl(uri, mode: LaunchMode.externalApplication);
+        return await launchUrl(uri, mode: mode);
+      } else {
+        // Direct launch attempt if canLaunchUrl check returns false on web/desktop
+        return await launchUrl(uri, mode: mode);
       }
     } catch (e) {
       debugPrint('Error launching URL ($urlString): $e');
@@ -15,11 +25,13 @@ class UrlLauncherService {
   }
 
   static Future<bool> openEmail(String email, {String subject = ''}) async {
-    final String mailto = 'mailto:$email?subject=${Uri.encodeComponent(subject)}';
+    final String mailto =
+        'mailto:$email${subject.isNotEmpty ? '?subject=${Uri.encodeComponent(subject)}' : ''}';
     return openUrl(mailto);
   }
 
   static Future<bool> openPhone(String phone) async {
-    return openUrl('tel:$phone');
+    final String cleanPhone = phone.replaceAll(RegExp(r'[^\d+]'), '');
+    return openUrl('tel:$cleanPhone');
   }
 }

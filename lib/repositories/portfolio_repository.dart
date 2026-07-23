@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+import '../core/constants/app_constants.dart';
 import '../models/contact_form_model.dart';
 import '../models/experience_model.dart';
 import '../models/project_model.dart';
@@ -322,7 +325,27 @@ class PortfolioRepository {
   }
 
   Future<bool> sendContactMessage(ContactFormModel formModel) async {
-    await Future.delayed(const Duration(milliseconds: 1000));
-    return true;
+    final url = Uri.parse(AppConstants.formspreeEndpoint);
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: jsonEncode({
+          'name': formModel.name,
+          'email': formModel.email,
+          'phone': formModel.phone ?? '',
+          'subject': formModel.subject,
+          'message': formModel.message,
+        }),
+      );
+
+      return response.statusCode >= 200 && response.statusCode < 300;
+    } catch (e) {
+      debugPrint('Error sending Formspree contact message: $e');
+      return false;
+    }
   }
 }

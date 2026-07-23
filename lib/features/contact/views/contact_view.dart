@@ -53,6 +53,16 @@ class _ContactViewState extends State<ContactView> {
           context: context,
           builder: (context) => const ContactSuccessDialog(),
         );
+      } else if (!success && context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              viewModel.errorMessage ??
+                  'Failed to send message. Please try again.',
+            ),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
       }
     }
   }

@@ -51,9 +51,7 @@ class ContactLeftContent extends StatelessWidget {
           icon: Icons.phone_outlined,
           label: 'Phone',
           value: AppConstants.phone,
-          onTap: () => UrlLauncherService.openUrl(
-            'tel:${AppConstants.phone.replaceAll(RegExp(r'\s+'), '')}',
-          ),
+          onTap: () => UrlLauncherService.openPhone(AppConstants.phone),
         ),
         const SizedBox(height: 16),
 

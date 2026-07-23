@@ -21,6 +21,7 @@ abstract class AppConstants {
   static const String linkedinUrl = 'https://www.linkedin.com/in/itssreerag';
   static const String whatsappUrl = 'https://wa.me/7034659121';
   static const String resumeUrl = 'https://sreerag.dev/resume.pdf';
+  static const String formspreeEndpoint = 'https://formspree.io/f/xrenaqgv';
 
   static const List<String> typingRoles = [
     'Flutter Developer',

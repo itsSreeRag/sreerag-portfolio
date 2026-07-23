@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "236014797490",
+    "project_id": "sreerag-portfolio",
+    "storage_bucket": "sreerag-portfolio.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236014797490:android:d698efa6e0c5d7f779bfab",
+        "android_client_info": {
+          "package_name": "com.example.sreerag_dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVkSgvWfm18jYLQ5ezh9m_Z2s11mm3O3Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

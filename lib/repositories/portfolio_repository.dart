@@ -262,27 +262,60 @@ class PortfolioRepository {
 
   Future<List<ExperienceModel>> fetchExperience() async {
     await Future.delayed(const Duration(milliseconds: 400));
+
     return [
       const ExperienceModel(
-        role: 'Flutter Developer Trainee',
-        company: 'Tech Solutions Ltd.',
-        duration: '2023 - Present',
-        location: 'Kerala, India',
+        role: 'Junior Flutter Developer',
+        company: 'Appzia Tec Solutions',
+        duration:
+            'Jan 2026 - Present', // Replace with your actual joining month
+        location: 'Wayanad, Kerala, India',
+
         responsibilities: [
-          'Developed production-grade cross-platform mobile and desktop interfaces using Flutter & Dart.',
-          'Integrated RESTful APIs and Firebase backend services including Auth and Firestore.',
-          'Built responsive layouts supporting mobile, tablet, and desktop web screen viewports.',
-          'Utilized Git & GitHub for collaborative code reviews, branching, and version tracking.',
-          'Diagnosed performance bottlenecks, resolved memory leaks, and refined UI animations.',
+          'Developed Flutter applications for Android and iOS using REST APIs.',
+          'Built features for E-Commerce and Parish Management applications.',
+          'Implemented new features and resolved production bugs.',
+          'Managed application state using Provider and Bloc.',
+          'Collaborated with backend and web teams using Git.',
         ],
+
+        technologies: [
+          'Flutter',
+          'Dart',
+          'REST APIs',
+          'Provider',
+          'Bloc',
+          'Firebase',
+          'Git',
+          'GitHub',
+        ],
+      ),
+
+      const ExperienceModel(
+        role: 'Flutter Developer Trainee',
+        company: 'Brototype',
+        duration: '2024 - 2025',
+        location: 'Calicut, Kerala, India',
+
+        responsibilities: [
+          'Completed intensive hands-on training in Flutter and Dart development.',
+          'Built real-world mobile, web, and desktop applications using Flutter.',
+          'Worked with Firebase, REST APIs, SQLite, Provider, Bloc and GetX in practical projects.',
+          'Practiced Git, GitHub, clean architecture, and collaborative development workflows.',
+          'Strengthened problem-solving skills through project-based learning and code reviews.',
+        ],
+
         technologies: [
           'Flutter',
           'Dart',
           'Firebase',
           'REST APIs',
-          'Provider',
-          'Git',
           'SQLite',
+          'Provider',
+          'GetX',
+          'Bloc',
+          'Git',
+          'GitHub',
         ],
       ),
     ];

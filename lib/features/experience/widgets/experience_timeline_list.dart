@@ -29,6 +29,7 @@ class ExperienceTimelineList extends StatelessWidget {
         return ExperienceTimelineItem(
           experience: experiences[index],
           isMobile: isMobile,
+          isLast: index == experiences.length - 1,
         );
       },
     );

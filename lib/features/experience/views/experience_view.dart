@@ -27,7 +27,7 @@ class ExperienceView extends StatelessWidget {
               const SectionHeader(
                 title: 'Experience',
                 subtitle:
-                    'Hands-on software development training, project deliveries, and engineering roles.',
+                    'My professional journey as a Flutter developer, building real-world applications and delivering production features.',
               ),
               const SizedBox(height: AppSpacing.xl),
 

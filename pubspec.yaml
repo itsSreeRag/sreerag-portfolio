@@ -28,3 +28,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/profile/
+    - assets/projects/
+    - assets/projects/lab_track/

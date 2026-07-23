@@ -9,6 +9,7 @@ import '../../../core/theme/app_typography.dart';
 import '../../../models/project_model.dart';
 import '../../../widgets/buttons/primary_button.dart';
 import '../../../widgets/buttons/secondary_button.dart';
+import 'project_image_carousel.dart';
 
 class ProjectDetailDialog extends StatelessWidget {
   final ProjectModel project;
@@ -51,16 +52,9 @@ class ProjectDetailDialog extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: AppSpacing.md),
-              ClipRRect(
-                borderRadius: AppRadius.borderMd,
-                child: SizedBox(
-                  height: 260,
-                  width: double.infinity,
-                  child: Image.network(
-                    project.imageUrl,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              ProjectImageCarousel(
+                images: project.images,
+                height: 260,
               ),
               const SizedBox(height: AppSpacing.lg),
               Text(

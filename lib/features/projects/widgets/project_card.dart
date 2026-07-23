@@ -5,8 +5,9 @@ import '../../../core/responsive/responsive_breakpoints.dart';
 import '../../../core/services/url_launcher_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../models/project_model.dart';
+import 'project_image_carousel.dart';
 
-class ProjectCard extends StatefulWidget {
+class ProjectCard extends StatelessWidget {
   final ProjectModel project;
   final bool isReversed;
   final VoidCallback onViewCaseStudy;
@@ -19,13 +20,6 @@ class ProjectCard extends StatefulWidget {
   });
 
   @override
-  State<ProjectCard> createState() => _ProjectCardState();
-}
-
-class _ProjectCardState extends State<ProjectCard> {
-  bool _isImageHovered = false;
-
-  @override
   Widget build(BuildContext context) {
     final isMobile = ResponsiveBreakpoints.isMobile(context);
 
@@ -36,7 +30,7 @@ class _ProjectCardState extends State<ProjectCard> {
       children: [
         // Project Title
         Text(
-          widget.project.title,
+          project.title,
           style: TextStyle(
             color: Colors.white,
             fontSize: isMobile ? 24 : 32,
@@ -50,7 +44,7 @@ class _ProjectCardState extends State<ProjectCard> {
         Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: widget.project.technologies
+          children: project.technologies
               .map(
                 (tech) => Container(
                   padding:
@@ -79,7 +73,7 @@ class _ProjectCardState extends State<ProjectCard> {
 
         // Project Short Description
         Text(
-          widget.project.shortDescription,
+          project.shortDescription,
           style: const TextStyle(
             color: Color(0xFF94A3B8),
             fontSize: 15.5,
@@ -89,17 +83,17 @@ class _ProjectCardState extends State<ProjectCard> {
         ),
         const SizedBox(height: 28),
 
-        // Action Buttons / Links (matching reference image)
+        // Action Buttons / Links
         Wrap(
           spacing: 20,
           runSpacing: 12,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             // Solid Red Primary Button: View Github
-            if (widget.project.githubUrl != null)
+            if (project.githubUrl != null)
               ElevatedButton.icon(
                 onPressed: () =>
-                    UrlLauncherService.openUrl(widget.project.githubUrl!),
+                    UrlLauncherService.openUrl(project.githubUrl!),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.dotAccent,
                   foregroundColor: Colors.white,
@@ -123,10 +117,10 @@ class _ProjectCardState extends State<ProjectCard> {
               ),
 
             // Text Link with Arrow: View project ↗
-            if (widget.project.liveDemoUrl != null)
+            if (project.liveDemoUrl != null)
               InkWell(
                 onTap: () =>
-                    UrlLauncherService.openUrl(widget.project.liveDemoUrl!),
+                    UrlLauncherService.openUrl(project.liveDemoUrl!),
                 borderRadius: BorderRadius.circular(4),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6),
@@ -156,7 +150,7 @@ class _ProjectCardState extends State<ProjectCard> {
 
             // Case Study link
             TextButton.icon(
-              onPressed: widget.onViewCaseStudy,
+              onPressed: onViewCaseStudy,
               style: TextButton.styleFrom(
                 foregroundColor: const Color(0xFF94A3B8),
               ),
@@ -174,72 +168,10 @@ class _ProjectCardState extends State<ProjectCard> {
       ],
     );
 
-    // Image Framed Container
-    final imageContent = MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _isImageHovered = true),
-      onExit: (_) => setState(() => _isImageHovered = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
-        curve: Curves.easeOut,
-        height: isMobile ? 240 : 320,
-        decoration: BoxDecoration(
-          color: const Color(0xFF141C28),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: _isImageHovered
-                ? AppColors.dotAccent.withValues(alpha: 0.5)
-                : Colors.white.withValues(alpha: 0.1),
-            width: 1.5,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: _isImageHovered
-                  ? AppColors.dotAccent.withValues(alpha: 0.2)
-                  : Colors.black.withValues(alpha: 0.3),
-              blurRadius: 20,
-              spreadRadius: 1,
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(11),
-          child: AnimatedScale(
-            scale: _isImageHovered ? 1.03 : 1.0,
-            duration: const Duration(milliseconds: 250),
-            curve: Curves.easeOut,
-            child: Image.network(
-              widget.project.imageUrl,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
-              errorBuilder: (context, error, stackTrace) => Container(
-                color: const Color(0xFF141C28),
-                alignment: Alignment.center,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.code_rounded,
-                      size: 48,
-                      color: AppColors.dotAccent,
-                    ),
-                    SizedBox(height: 12),
-                    Text(
-                      'Project Preview',
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+    // Image Carousel Container
+    final imageContent = ProjectImageCarousel(
+      images: project.images,
+      isMobile: isMobile,
     );
 
     return Container(
@@ -255,7 +187,7 @@ class _ProjectCardState extends State<ProjectCard> {
             )
           : Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: widget.isReversed
+              children: isReversed
                   ? [
                       Expanded(flex: 6, child: imageContent),
                       const SizedBox(width: 48),
@@ -270,4 +202,3 @@ class _ProjectCardState extends State<ProjectCard> {
     );
   }
 }
-

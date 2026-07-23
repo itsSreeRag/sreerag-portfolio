@@ -6,7 +6,7 @@ import '../../../core/theme/app_spacing.dart';
 import '../viewmodels/contact_viewmodel.dart';
 import '../widgets/contact_form_fields.dart';
 import '../widgets/contact_header.dart';
-import '../widgets/contact_headline_section.dart';
+import '../widgets/contact_left_content.dart';
 import '../widgets/contact_success_dialog.dart';
 
 class ContactView extends StatefulWidget {
@@ -75,18 +75,16 @@ class _ContactViewState extends State<ContactView> {
               const ContactHeader(),
               const SizedBox(height: 48),
 
-              // 2-Column Main Section (Headline + Submit Button on Left, Minimal Underline Form on Right)
+              // 2-Column Main Section (Headline + Professional Contact Info on Left, Minimal Underline Form + Submit Button on Right)
               Flex(
                 direction: isMobile ? Axis.vertical : Axis.horizontal,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Left Column: Headline + Solid Coral Red Submit Button
+                  // Left Column: Headline + Elegant Contact Info Rows
                   Expanded(
                     flex: isMobile ? 0 : 5,
-                    child: ContactHeadlineSection(
+                    child: ContactLeftContent(
                       isMobile: isMobile,
-                      isSubmitting: viewModel.isSubmitting,
-                      onSubmit: () => _submitForm(context, viewModel),
                     ),
                   ),
 
@@ -95,7 +93,7 @@ class _ContactViewState extends State<ContactView> {
                   else
                     const SizedBox(width: 80),
 
-                  // Right Column: Underline Form Fields (Name, Email, Phone Number, Message)
+                  // Right Column: Underline Form Fields (Name, Email, Phone Number, Message) + Submit Button below
                   Expanded(
                     flex: isMobile ? 0 : 7,
                     child: ContactFormFields(
@@ -104,6 +102,8 @@ class _ContactViewState extends State<ContactView> {
                       emailController: _emailController,
                       phoneController: _phoneController,
                       messageController: _messageController,
+                      isSubmitting: viewModel.isSubmitting,
+                      onSubmit: () => _submitForm(context, viewModel),
                     ),
                   ),
                 ],

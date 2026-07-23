@@ -17,16 +17,16 @@ abstract class AppConstants {
   static const String email = 'connectsreeragp@gmail.com';
   static const String phone = '+91 7034659121';
   static const String location = 'Kerala, India';
-  static const String githubUrl = 'https://github.com/sreerag-dev';
-  static const String linkedinUrl = 'https://linkedin.com/in/sreerag-dev';
-  static const String whatsappUrl = 'https://wa.me/919876543210';
+  static const String githubUrl = 'https://github.com/itsSreeRag';
+  static const String linkedinUrl = 'https://www.linkedin.com/in/itssreerag';
+  static const String whatsappUrl = 'https://wa.me/7034659121';
   static const String resumeUrl = 'https://sreerag.dev/resume.pdf';
 
   static const List<String> typingRoles = [
     'Flutter Developer',
-    'Software Engineer',
-    'Mobile Application Specialist',
-    'Cross-Platform Architect',
+    'Cross-Platform Developer',
+    'Mobile App Developer',
+    'Flutter & Firebase Developer',
   ];
 
   static const List<String> navItems = [

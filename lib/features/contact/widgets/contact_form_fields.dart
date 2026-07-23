@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
-/// Right section of Contact form: Underline Form Fields (Name, Email, Phone, Message)
+/// Right section of Contact form: Underline Form Fields (Name, Email, Phone, Message) + Submit Button below
 class ContactFormFields extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
   final TextEditingController emailController;
   final TextEditingController phoneController;
   final TextEditingController messageController;
+  final bool isSubmitting;
+  final VoidCallback onSubmit;
 
   const ContactFormFields({
     super.key,
@@ -16,6 +18,8 @@ class ContactFormFields extends StatelessWidget {
     required this.emailController,
     required this.phoneController,
     required this.messageController,
+    required this.isSubmitting,
+    required this.onSubmit,
   });
 
   @override
@@ -92,6 +96,43 @@ class ContactFormFields extends StatelessWidget {
               }
               return null;
             },
+          ),
+          const SizedBox(height: 36),
+
+          // Solid Coral Red Submit Button moved BELOW form, aligned with fields
+          SizedBox(
+            height: 48,
+            child: ElevatedButton(
+              onPressed: isSubmitting ? null : onSubmit,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.dotAccent,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 40,
+                  vertical: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                elevation: 0,
+              ),
+              child: isSubmitting
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  : const Text(
+                      'Submit',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+            ),
           ),
         ],
       ),

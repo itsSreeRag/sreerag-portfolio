@@ -31,42 +31,30 @@ class AboutViewModel extends ChangeNotifier {
   final List<AboutServiceItem> services = const [
     AboutServiceItem(
       icon: Icons.flutter_dash_rounded,
-      title: 'Flutter Development',
-      subtitle: 'Cross-platform iOS, Android, and Desktop apps',
+      title: 'Cross-Platform Development',
+      subtitle: 'Android • iOS • Web • Windows',
     ),
     AboutServiceItem(
-      icon: Icons.phone_iphone_rounded,
-      title: 'Mobile Applications',
-      subtitle: 'Native feel with pixel-perfect UI & state management',
+      icon: Icons.layers_rounded,
+      title: 'Scalable Architecture',
+      subtitle: 'MVVM • Provider • Modular Code',
     ),
     AboutServiceItem(
-      icon: Icons.desktop_windows_outlined,
-      title: 'Windows Desktop Systems',
-      subtitle: 'High-performance desktop apps & local storage',
+      icon: Icons.storage_rounded,
+      title: 'Backend & Data',
+      subtitle: 'Firebase • REST APIs • SQLite • Hive',
     ),
     AboutServiceItem(
-      icon: Icons.api_rounded,
-      title: 'REST API & Firebase',
-      subtitle: 'Cloud syncing, auth, and real-time backend services',
+      icon: Icons.design_services_rounded,
+      title: 'Modern UI/UX',
+      subtitle: 'Responsive • Animations • Clean Design',
     ),
   ];
 
   final List<AboutStatItem> stats = const [
-    AboutStatItem(
-      countValue: 3,
-      symbol: '+',
-      label: 'Years of\nexperience',
-    ),
-    AboutStatItem(
-      countValue: 10,
-      symbol: '+',
-      label: 'Completed\nProjects',
-    ),
-    AboutStatItem(
-      countValue: 100,
-      symbol: '%',
-      label: 'Client\nsatisfaction',
-    ),
+    AboutStatItem(countValue: 1, symbol: '+', label: 'Years of\nexperience'),
+    AboutStatItem(countValue: 10, symbol: '+', label: 'Completed\nProjects'),
+    // AboutStatItem(countValue: 100, symbol: '%', label: 'Client\nsatisfaction'),
   ];
 
   bool _isHovered = false;
